@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commonplace — a personal knowledge assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="brand">
+      <h1>Commonplace</h1>
+      <span class="tagline">a personal knowledge assistant, built on retrieval and reasoning</span>
+    </div>
+    <div class="header-meta">
+      <span id="entryCountLabel">0 entries</span>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme">theme</button>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <h2>Library</h2>
+    <p class="sub">Add notes, articles, or anything you want Commonplace to draw on when it answers.</p>
+
+    <div class="add-entry">
+      <label for="entryTitle">Title</label>
+      <input type="text" id="entryTitle" maxlength="120" placeholder="e.g. Notes on tide pools">
+      <label for="entryContent">Content</label>
+      <textarea id="entryContent" placeholder="Paste or write the note here..."></textarea>
+      <div class="row-btn">
+        <button class="btn" id="addEntryBtn" type="button">Add to library</button>
+      </div>
+      <div class="form-note" id="addEntryNote"></div>
+    </div>
+
+    <div class="library-count" id="libraryStatus">Loading library…</div>
+    <ul class="entry-list" id="entryList"></ul>
+  </aside>
+
+  <main class="main">
+    <div class="transcript" id="transcript">
+      <div class="welcome" id="welcome">
+        <h2>Ask what your notes know.</h2>
+        <p>Commonplace retrieves the most relevant passages from your library, then asks a model to answer using only what it finds there — with the sources shown underneath every answer.</p>
+        <p id="welcomeSub" style="color: var(--ink-faint); font-size: 13px;"></p>
+      </div>
+    </div>
+    <div class="ask">
+      <div id="askBanner"></div>
+      <form id="askForm">
+        <select id="modelSelect" aria-label="Model to answer with"></select>
+        <textarea id="askInput" rows="1" placeholder="Ask a question about your library…"></textarea>
+        <button class="btn" id="askBtn" type="submit">Ask</button>
+      </form>
+      <div class="hint">Answers are grounded only in the entries on the left — not general knowledge.</div>
+    </div>
+  </main>
+</div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
